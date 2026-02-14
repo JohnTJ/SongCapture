@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24512" systemVersion="25A354" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="MatchedSong" representedClassName="MatchedSong" syncable="YES" codeGenerationType="class">
+        <attribute name="appleMusicSongID" optional="YES" attributeType="String"/>
+        <attribute name="artist" attributeType="String"/>
+        <attribute name="artworkURL" optional="YES" attributeType="String"/>
+        <attribute name="dateMatched" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="playlist" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SavedPlaylist" inverseName="matchedSongs" inverseEntity="SavedPlaylist"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="PlaylistGroup" representedClassName="PlaylistGroup" syncable="YES" codeGenerationType="class">
+        <attribute name="dateCreated" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="playlists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SavedPlaylist" inverseName="group" inverseEntity="SavedPlaylist"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="SavedPlaylist" representedClassName="SavedPlaylist" syncable="YES" codeGenerationType="class">
+        <attribute name="artworkURL" optional="YES" attributeType="String"/>
+        <attribute name="dateAdded" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="service" attributeType="String"/>
+        <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaylistGroup" inverseName="playlists" inverseEntity="PlaylistGroup"/>
+        <relationship name="matchedSongs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchedSong" inverseName="playlist" inverseEntity="MatchedSong"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>
